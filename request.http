@@ -1,0 +1,21 @@
+### 🔹 GET request
+GET http://localhost:3000/protected
+Authorization: Bearer your-jwt-token
+
+### 🔹 POST request (Register)
+POST http://localhost:3000/register
+Content-Type: application/json
+
+{
+    "username": "Kittu",
+    "password": "123"
+}
+
+### 🔹 POST request (Login)
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "username": "Happy",
+    "password": "123"
+}

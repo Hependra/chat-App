@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Chat Window</title>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style4.css">
+</head>
+<body>
+    <div class="main1">
+        <div class="main">
+            <div class="up-main">
+                <h2><span id="chat-username"></span></h2>
+                <button id ='back-button'>Back</button>
+            </div>
+            <div class="down-main">
+                <div id="chat-area"></div>
+                <div class="msg">
+                    <input id="message-input" type="text" placeholder="Type a message..." />
+                    <button id="send-button">send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+    <script>
+        const token = localStorage.getItem('token');
+        const username = localStorage.getItem('username');
+        const chatWith = localStorage.getItem('chatWith');
+
+        if (!token || !username || !chatWith) {
+            alert("Unauthorized! Redirecting...");
+            window.location.href = '/';
+        }
+
+        document.getElementById('chat-username').textContent = chatWith;
+
+        const socket = io('http://localhost:3000', {
+            auth: { token }
+        });
+
+        socket.on('connect', () => {
+            socket.emit('load chat', { withUser: chatWith });
+        });
+
+        socket.on('chat history', (messages) => {
+            const chatArea = document.getElementById('chat-area');
+            chatArea.innerHTML = '';
+            messages.forEach(msg => {
+                const p = document.createElement('p');
+                p.textContent = msg.sender === username ? `${msg.message}` : `${msg.message}`;
+                p.className = msg.sender === username ? 'user' : 'receiver';
+                chatArea.appendChild(p);
+            });
+        });
+
+        socket.on('new message', (msg) => {
+            console.log('Incoming message:', msg); // Debug
+
+            if (msg.sender === chatWith || msg.receiver === chatWith) {
+                const chatArea = document.getElementById('chat-area');
+                const p = document.createElement('p');
+
+                const isUser = msg.sender === username;
+                p.textContent = isUser ? `You: ${msg.message}` : `${msg.sender}: ${msg.message}`;
+                p.className = isUser ? 'user' : 'receiver';
+
+                console.log('Assigned class:', p.className); // Debug
+
+                chatArea.appendChild(p);
+            }
+        });
+
+        document.getElementById('send-button').addEventListener('click', () => {
+            const input = document.getElementById('message-input');
+            const message = input.value.trim();
+            if (!message) return;
+            socket.emit('private_message', { toUserID: chatWith, message });
+            input.value = '';
+        });
+
+        document.getElementById('back-button').addEventListener('click', () => {
+            window.location.href = '/chat.html';
+        });
+    </script>
+</body>
+</html>

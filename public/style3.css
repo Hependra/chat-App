@@ -1,0 +1,82 @@
+body {
+    background-color: #565449;
+    color: #565449;
+    font-family: 'Montserrat', sans-serif;
+}
+.main1{
+    display: grid;
+    place-items: center;  /* shorthand for justify-items + align-items */
+}
+.main{
+    margin-top: 10vw;
+    max-width: 70vw;
+    width: 70vw;     
+    height: 100vw; 
+    border-radius: 1vw;
+    background-color: #D8CFBC;
+}
+h1 {
+    margin: 0;
+    text-align:left;
+    padding-top: 3vw;
+    padding-left: 2vw;
+    font-size: 7vw;
+    height: 20vw;
+    width: 97.2%;
+    font-weight: bolder;
+    border-radius: 1vw;
+}
+
+h2 {
+    margin: 0;
+    padding-left: 2vw;
+    padding-top: 3vw;
+    font-size: 4vw;
+    font-weight: bolder;
+    margin-bottom: 5vw;
+    
+}
+
+#chat-box {
+    display: grid;
+    place-items: center;
+
+}
+
+#chat-box .user-entry{
+    width: 92%;
+    color:#565449;
+    justify-content: center;
+    align-items: center;
+    font-size: 2vw;
+    font-weight: bolder;
+    height: 5vw;
+    border-radius: 1vw;
+    padding-left: 3vw;
+    padding-top: 2vw;
+    border:0.1vw solid #565449;
+    margin-bottom: 1vw;
+}
+
+#chat-box .user-entry:hover{
+    background-color: #565449;
+    color:#D8CFBC;
+
+}
+
+#logout{
+    margin-top: 55%;
+    height: 5vw;
+    width: 95%;
+    margin-left: 2vw;
+    background-color: #D8CFBC;
+    border:0.1vw solid #565449;
+    border-radius: 1vw;
+    color:#565449;
+    font-size: 2.5vw;
+}
+
+#logout:hover{
+    background-color: #565449;
+    color:#D8CFBC;
+}

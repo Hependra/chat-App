@@ -1,0 +1,66 @@
+body {
+    background-color: #FFFBF4;
+    color: #11120D;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+h2 {
+    margin-top: 20vw;
+    text-align:center;
+    font-size: 5vw;
+}
+
+#registerForm {
+    padding: 1vw;
+    margin-top: 30vw;
+}
+
+#usertag {
+    font-size: 1.5vw;
+    color:#565449;
+}
+
+#username {
+    width: 90vw;
+    height: 5vw;
+    border-radius: 1.7vw;
+    border: none;
+    color:#565449;
+    font-size: 1.5vw;
+    font-weight: 700;
+    background-color: #D8CFBC;
+    margin-bottom: 2vw;
+}
+
+#passtag {
+    font-size: 1.5vw;
+    color:#565449;
+}
+
+#password {
+    width: 90vw;
+    height: 5vw;
+    border-radius: 1.7vw;
+    border: none;
+    color:#565449;
+    font-size: 1.5vw;
+    font-weight: 700;
+    background-color: #D8CFBC;
+}
+
+.button {
+    margin-top: 10vw;
+    width: 91vw;
+    height: 5vw;
+    border-radius: 1.7vw;
+    border: none;
+    background-color: #565449;
+    color: #FFFBF4;
+}
+
+p {
+    text-align: center;
+    font-size: 1.5vw;
+    color:#565449;
+}

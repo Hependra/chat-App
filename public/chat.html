@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Room</title>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style3.css">
+</head>
+<body>
+    <div class="main1">
+        <div class="main">
+            <h1>Chat On</h1>
+            <h2>Online</h2>
+            <div id="chat-box"></div>
+            <p class="chat1"></p>
+            <button id="logout" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <script>
+        const token = localStorage.getItem('token');
+        const username = localStorage.getItem('username');
+
+        if (!token || !username) {
+            alert("Unauthorized! Redirecting to login...");
+            window.location.href = '/login.html';
+        }
+
+        const socket = io('http://localhost:3000', {
+            auth: { token }
+        });
+
+        const lastMessages = {};
+
+        socket.on('connect', () => {
+            console.log('Connected to server:', socket.id);
+        });
+
+        socket.on('user list', (users) => {
+            const userlist = document.getElementById('chat-box');
+            userlist.innerHTML = '';
+            users.forEach(user => {
+                if (user !== username) {
+                    const container = document.createElement('div');
+                    container.className = 'user-entry';
+                    container.textContent = user;
+
+                    container.onclick = () => {
+                        // Save the selected user in localStorage
+                        localStorage.setItem('chatWith', user);
+                        window.location.href = '/chat1.html'; // Navigate to new page
+                    };
+
+                    userlist.appendChild(container);
+                }       
+            });
+        });
+
+        function logout() {
+            if (socket && socket.connected) {
+                socket.disconnect();
+                console.log('User disconnected');
+            }
+
+            localStorage.removeItem('token');
+            localStorage.removeItem('username');
+            window.location.href = '/login.html';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="style1.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h2>Get Started</h2>
+    <form id="registerForm">
+        <label id='usertag' for="username">Username</label><br>
+        <input type="text" id="username" placeholder="Enter username" required><br><br>
+        <label id='passtag' for="password">password</label><br>
+        <input type="password" id="password" placeholder="Enter password" required><br><br>
+        <button class='button'type="submit">Register</button>
+    </form>
+
+    <p>Already have an account? <a href="https://example.com">Sign in</a></p>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const response = await fetch('/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+
+            const result = await response.json();
+            alert(result.message);
+        });
+        function login() {
+             window.location.href = '/login.html'
+        }
+    </script>
+</body>
+</html>

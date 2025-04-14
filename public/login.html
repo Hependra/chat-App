@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="style2.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Enter username">
+    <input type="password" id="password" placeholder="Enter password">
+    <button onclick="login()">Login</button>
+    <p id="message"></p>
+
+    <script>
+        async function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch('http://localhost:3000/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    // ✅ Store token in local storage
+                    localStorage.setItem('token', result.token);
+                    localStorage.setItem('username', result.username);
+
+                    // ✅ Redirect to chat page
+                    window.location.href = `/chat.html?username=${encodeURIComponent(username)}`;
+                } else {
+                    document.getElementById('message').textContent = result.error;
+                    document.getElementById('message').style.color = "red";
+                }
+            } catch (error) {
+                console.error("Login error:", error);
+                document.getElementById('message').textContent = "Login failed. Try again.";
+                document.getElementById('message').style.color = "red";
+            }
+        }
+    </script>
+</body>
+</html>

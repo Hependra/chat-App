@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <Title>Chat app</Title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+        <div class="gif">
+            <img src="logo.gif" alt="Cool animation" />
+        </div>
+        <h1>Chat On</h1>
+        <div class="button">
+            <button onClick="register()">New user</button>
+            <button onClick="login()">Log In</button>
+        </div>
+
+    <script>
+        const register = () => {
+            window.location.href = '/register.html';
+        }
+
+        function login() {
+            window.location.href = '/login'
+        }
+    </script>
+    </body>
+</html>
